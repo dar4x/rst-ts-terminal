@@ -1,0 +1,26 @@
+.card {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 50px;
+}
+
+.card__btn {
+  width: 470px;
+  height: 80px;
+  font-size: 20px;
+  font-weight: 500;
+  border-radius: 21px;
+  transition: 0.2s;
+  border: 3px solid rgba(1, 116, 177, 1);
+  background: rgba(255, 255, 255, 1);
+  color: rgba(1, 116, 177, 1);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card__btn:hover {
+  background-color: rgba(1, 116, 177, 1);
+  color: rgba(255, 255, 255, 1);
+}

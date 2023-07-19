@@ -8,7 +8,7 @@ import Lock from 'src/assets/images/solar_lock-outline.svg';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 
-function PinPage() {
+function UnlockPage() {
   const [pinCode, setPinCode] = useState(['', '', '', '']);
   const [isScreenBlocked, setIsScreenBlocked] = useState(false);
   const [unlock, setUnlock] = useState(false);
@@ -51,33 +51,16 @@ function PinPage() {
     }
   };
 
+  console.log(pinCode);
+
   useEffect(() => {
     if (pinCode.join('') === '4444') {
-      setIsScreenBlocked(true);
-    } else {
-      setIsScreenBlocked(false);
+      navigate('/');
     }
   }, [pinCode]);
 
   return (
     <div className={styles.container}>
-      {isScreenBlocked && (
-        <div className={styles.container}>
-          <div className={styles.content}>
-            <div className={styles.header__logo}>
-              <img src={Logo} alt="" />
-            </div>
-            <div className={styles.blocked}>
-              <img src={LockFill} alt="" />
-              <h1>Экран временно заблокирован</h1>
-            </div>
-          </div>
-          <div className={styles.unlock}>
-            <img src={Lock} alt="" />
-            <Link to={'/terminal/unLock'}>Разблокировать экран</Link>
-          </div>
-        </div>
-      )}
       {!isScreenBlocked && (
         <div className={styles.content}>
           <div className={styles.header__logo}>
@@ -202,4 +185,4 @@ function PinPage() {
   );
 }
 
-export default PinPage;
+export default UnlockPage;

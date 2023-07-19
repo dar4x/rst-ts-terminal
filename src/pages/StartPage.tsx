@@ -85,13 +85,13 @@ function StartPage() {
       {showContent3 && (
         <div className={styles.content3}>
           <div className={styles.entity}>
-            <Link to={'/'} className={styles.entity__btn}>
+            <Link to={'/terminal/services'} className={styles.entity__btn}>
               Физическое лицо
             </Link>
-            <Link to={'/'} className={styles.entity__btn}>
+            <Link to={'/terminal/services'} className={styles.entity__btn}>
               Юридическое лицо
             </Link>
-            <Link to={'/'} className={styles.entity__btn}>
+            <Link to={'/terminal/services'} className={styles.entity__btn}>
               Платежные карты
             </Link>
           </div>

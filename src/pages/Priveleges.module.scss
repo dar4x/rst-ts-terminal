@@ -1,0 +1,40 @@
+.header__title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.header__title h1 {
+  font-weight: 600;
+  font-size: 40px;
+  color: rgba(51, 48, 48, 1);
+}
+
+.header__content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.btns {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 70px;
+}
+.btn {
+  width: 450px;
+  height: 80px;
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.25);
+  background: rgba(1, 116, 177, 1);
+  color: rgba(255, 255, 255, 1);
+  font-size: 26px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
