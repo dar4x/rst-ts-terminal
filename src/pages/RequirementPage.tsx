@@ -2,12 +2,14 @@ import React from 'react';
 import styles from './Requirement.module.scss';
 import { Link } from 'react-router-dom';
 import Note from 'src/assets/images/ph_note-thin.svg';
+import { useTranslation } from 'react-i18next';
 
 function RequirementPage() {
+  const { t } = useTranslation();
   return (
     <div className={styles.header}>
       <div className={styles.header__title}>
-        <h1>Операция по корпоративному счету</h1>
+        <h1>{ t("operation") }</h1>
       </div>
       <div className={styles.header__content}>
         <p>
@@ -18,10 +20,10 @@ function RequirementPage() {
         <div className={styles.btns}>
           <Link to={'/terminal/documentation'} className={styles.btn}>
             <img src={Note} alt="" />
-            Требуемые документы
+            { t("requiredDocs") }
           </Link>
           <Link to={'/terminal/privileges'} className={styles.btn}>
-            Далее
+            { t("next") }
           </Link>
         </div>
       </div>
