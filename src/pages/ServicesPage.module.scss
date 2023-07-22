@@ -11,3 +11,31 @@
   font-size: 40px;
   color: rgba(0, 0, 0, 1);
 }
+
+.d_f{
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1%;
+}
+
+.backBTN{
+  display: flex;
+  box-shadow: rgba(0, 0, 0, 0.25);
+  border: none;
+  background-color: rgba(1, 116, 177, 1);
+  width: 410px;
+  height: 20px;
+  padding: 30px 0px;
+  border-radius: 20px;
+  font-size: 20px;
+  font-weight: 500;
+  color: white;
+  margin-top: 30px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition-duration: 0.3s;
+}
