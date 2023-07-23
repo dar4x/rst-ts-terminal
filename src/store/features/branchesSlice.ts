@@ -1,56 +1,98 @@
-import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit"
-import $axios from "src/utils/axios"
-import { BASE_URL } from "src/utils/const"
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+import $axios from 'src/utils/axios';
+import { BASE_URL } from 'src/utils/const';
 
-export interface BranchesI {
-    id: number,
-    name: string,
-    phone: string,
-    schedule_start?: string,
-    schedule_end?: string,
-    city?: string,
-    street?: string,
-    admin?: string,
-    region?: string
+// Определите интерфейс для типа данных, которые вы получите с бэкенда
+interface ServiceType {
+  id: number,
+  name: string
 }
 
-interface BranchesState{
-    branches: BranchesI[],
-    isLoading: boolean,
-    error: string | null
+interface branchesQueueI {
+  id: number,
+  name: string,
+  description?: null,
+  documents: string,
+  optional_documents?: string,
+  symbol?: string,
+  is_blocked?: boolean,
+  waiting_time_operator?: number,
+  branch: number,
+  services: number,
+  operator: number[]
 }
 
-const initialState:BranchesState = {
-    branches: [],
-    isLoading: false,
-    error: null
+type CustomersI = {
+  category: string,
+  queue: number
 }
 
-export const getBranches = createAsyncThunk("branches/getBranches", async () => {
-    const response = await $axios.get(`${BASE_URL}/branches/`);
-    return response.data
-})
+interface CustomersData {
+  category: string;
+  queue: number;
+}
 
+// Измените URL на актуальный эндпоинт
+const API_URL = 'http://35.228.114.191/branches/1/get_service_types/';
 
-export const BranchesSlice = createSlice({
-    name: "branches",
-    initialState,
-    reducers: {},
-    extraReducers: (builder) => {
-        builder.addCase(getBranches.pending, (state) => {
-            state.isLoading = true;
-            state.error = null;
-        })
-        .addCase(getBranches.fulfilled, (state, action: PayloadAction<BranchesI[]>) => {
-            state.isLoading = false,
-            state.branches = action.payload
-        })
-        .addCase(getBranches.rejected, (state, action) => {
-            state.isLoading = false,
-            state.error = action.error.message || "An error occurred while fetching branches. (Ошибка короче)"
-        });
+// Создайте асинхронный thunk для получения данных с бэкенда
+export const fetchServiceTypes = createAsyncThunk<ServiceType[], void, { rejectValue: string }>(
+    'branches/fetchServiceTypes',
+    async (_, { rejectWithValue }) => {
+      try {
+        const response = await axios.get<ServiceType[]>(API_URL);
+        return response.data;
+      } catch (error) {
+        // Обработка ошибки и возврат сообщения об ошибке
+        return rejectWithValue('Ошибка при получении данных.');
+      }
     }
-})
+  );
 
-export default BranchesSlice.reducer;
-export const {  } = BranchesSlice.actions;
+  export const fetchBranchesQueue = createAsyncThunk<branchesQueueI[], string>('branches/queue', async (serviceID) => {
+    try {
+      const response = await axios.get<branchesQueueI[]>(`${BASE_URL}/branch/1/${serviceID}/service_queues/`);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  });
+  
+
+  export const fetchCustomersAdd = createAsyncThunk<CustomersI[], CustomersData>(
+    'customers',
+    async ({ category, queue }) => {
+      try {
+        const data = {
+          category: category,
+          queue: queue,
+        };
+        const response = await axios.post(`${BASE_URL}/customers/`, data);
+        console.log(response.data)
+        return response.data; // Assuming response.data is the array of CustomersI[]
+      } catch (error) {
+        console.log(error);
+        throw error; // You can re-throw the error or handle it differently if needed.
+      }
+    }
+  );
+
+// Создайте slice с состоянием и редюсерами для получения данных о филиалах
+const branchesSlice = createSlice({
+  name: 'branches',
+  initialState: [] as ServiceType[],
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(fetchServiceTypes.fulfilled, (state, action) => {
+      return action.payload;
+    });
+    builder.addCase(fetchBranchesQueue.fulfilled, (state, action) => {
+      return action.payload
+    })
+  },
+});
+
+// Экспортируйте редюсер
+export const branchesReducer = branchesSlice.reducer;
