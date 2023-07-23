@@ -1,4 +1,4 @@
-import React, { StrictMode } from 'react';
+import React, { StrictMode, Suspense } from 'react';
 import * as ReactDOM from 'react-dom/client';
 
 import App from './app/app';
@@ -9,11 +9,15 @@ const root = ReactDOM.createRoot(
 );
 
 import './i18n';
+import { Provider } from 'react-redux';
+import store from './store/store';
 
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-        <App />
+        <Provider store={store} >
+            <App/>
+        </Provider>
     </BrowserRouter>
   </React.StrictMode>
 );
