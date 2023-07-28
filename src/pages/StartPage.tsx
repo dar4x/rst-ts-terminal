@@ -32,6 +32,7 @@ import { SaveIDFunc } from 'src/functions/SaveIDFunc';
       dispatch(fetchServiceTypes());
     }, [dispatch]);
 
+
     return (
       <div className={styles.header}>
         {showContent1 && (
@@ -98,8 +99,8 @@ import { SaveIDFunc } from 'src/functions/SaveIDFunc';
           <div className={styles.content3}>
             <div className={styles.entity}>
               { serviceTypes?.map((service: any) => (
-                <Link to={'/terminal/services'} className={styles.entity__btn} key={service.id} onClick={() => SaveIDFunc(service.id)} >
-                  { service.name === 'payment cards' ? t("paymentCards") : service.name === 'individuals' ? t("legalEntity") : service.name === 'legal entities' ? t("physicalEntity") : "Неизвестно" }
+                <Link to={'/terminal/services'} className={styles.entity__btn} key={service.id} onClick={() => SaveIDFunc(service)} >
+                  { service.name === 'payment cards' ? t("paymentCards") : service.name === 'individuals' ? t("physicalEntity") : service.name === 'legal entities' ? t("legalEntity") : "Неизвестно" }
                 </Link>
               )) }
               <div className={styles.back__btn2} onClick={() => {

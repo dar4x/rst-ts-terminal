@@ -1,0 +1,81 @@
+.ticket_header{
+    display: flex;
+    width: 380px;
+    height: 724px;
+    padding: 20px 15px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    width: 349px;
+    height: 79px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: -0.61px;
+    flex-shrink: 0;
+}
+
+.ticket_body{
+    display: flex;
+    width: 349px;
+    height: 604px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 28px;
+    flex-shrink: 0;
+}
+
+.title{
+    color: #0174B1;
+    font-family: Montserrat ;
+    font-size: 34.188px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.time{
+    width: 210px;
+    height: 26px;
+    flex-shrink: 0;
+    color: #000;
+    font-family: Montserrat;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.detail{
+    color: #000;
+    text-align: center;
+    font-family: Montserrat;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    width: 267px;
+    height: 49.897px;
+    flex-shrink: 0;
+}
+
+.window{
+    width: 75px;
+    color: #000;
+    font-family: Montserrat;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.qr {
+    width: 159px;
+    height: 153px;
+    flex-shrink: 0;
+}
