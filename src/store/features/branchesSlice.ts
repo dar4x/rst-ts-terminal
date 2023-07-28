@@ -69,6 +69,9 @@ export const fetchServiceTypes = createAsyncThunk<ServiceType[], void, { rejectV
       }
       const response = await axios.post(`${BASE_URL}/customers/`, data);
       console.log('Функция добавления', response.data);
+      if(response.data) {
+        localStorage.setItem("printTALON", JSON.stringify(response.data))
+      }
     } catch (error) {
       console.log(error)
     }
