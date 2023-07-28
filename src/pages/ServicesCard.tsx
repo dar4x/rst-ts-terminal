@@ -1,5 +1,6 @@
 import { AnyAction } from '@reduxjs/toolkit';
 import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { ThunkDispatch } from 'redux-thunk';
@@ -14,10 +15,14 @@ function ServicesCard() {
   const serviceID = getIDFunc();
 
   useEffect(() => {
-    dispatch(fetchBranchesQueue(serviceID));
+    dispatch(fetchBranchesQueue(serviceID.id));
   }, []);
 
   const servicesQueue = useAppSelector((state) => state.branches);
+
+  const { t } = useTranslation();
+
+  console.log(servicesQueue)
 
   return (
     <div className={styles.card}>
@@ -25,7 +30,7 @@ function ServicesCard() {
         <Link to={'/terminal/requirement'} className={styles.card__btn} onClick={ () => {
           SaveQUEUE(services.id, services.name, services.documents, services.optional_documents, services.symbol, services.services)
         } }>
-          { services.name }
+          {t(`services.${services.name}`)}
         </Link>
       )) }
     </div>

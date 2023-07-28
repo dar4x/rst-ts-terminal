@@ -1,14 +1,14 @@
-export const SaveIDFunc = (serviceID: number) => {
+export const SaveIDFunc = (serviceID: any) => {
     const localID = localStorage.setItem("serviceID", JSON.stringify(serviceID));
     return localID;
 }
 
-export const getIDFunc = (): string => {
+export const getIDFunc = (): any => {
     const response = localStorage.getItem("serviceID");
     if (response === null) {
       throw new Error("Service ID not found in localStorage.");
     }
-    return response;
+    return JSON.parse(response);
   };
   
 export const SaveQUEUE = (id: number, name: string, documents: string, optional_documents: string, symbol: string, services: string) => {

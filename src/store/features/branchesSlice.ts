@@ -61,23 +61,18 @@ export const fetchServiceTypes = createAsyncThunk<ServiceType[], void, { rejectV
   });
   
 
-  export const fetchCustomersAdd = createAsyncThunk<CustomersI[], CustomersData>(
-    'customers',
-    async ({ category, queue }) => {
-      try {
-        const data = {
-          category: category,
-          queue: queue,
-        };
-        const response = await axios.post(`${BASE_URL}/customers/`, data);
-        console.log(response.data)
-        return response.data; // Assuming response.data is the array of CustomersI[]
-      } catch (error) {
-        console.log(error);
-        throw error; // You can re-throw the error or handle it differently if needed.
+  export const fetchCustomersAdd = async (category: string, queue: number) => {
+    try {
+      const data: CustomersData = {
+        category: category,
+        queue: queue
       }
+      const response = await axios.post(`${BASE_URL}/customers/`, data);
+      console.log('Функция добавления', response.data);
+    } catch (error) {
+      console.log(error)
     }
-  );
+  }
 
 // Создайте slice с состоянием и редюсерами для получения данных о филиалах
 const branchesSlice = createSlice({
