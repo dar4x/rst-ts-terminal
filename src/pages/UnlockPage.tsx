@@ -13,6 +13,10 @@ function UnlockPage() {
   const [isScreenBlocked, setIsScreenBlocked] = useState(false);
   const [unlock, setUnlock] = useState(false);
 
+  const [ error, setError ] = useState(false);
+
+  const pin = localStorage.getItem('newPin') || '';
+
   const navigate = useNavigate();
 
   const handleChange = (
@@ -54,10 +58,22 @@ function UnlockPage() {
   console.log(pinCode);
 
   useEffect(() => {
-    if (pinCode.join('') === '4444') {
-      navigate('/');
+    const formattedPin = pinCode.join('').trim(); 
+    const storedPin = (pin.replace(/"/g, '') ?? '').toString();
+    
+    const allSlotsFilled = pinCode.every((code) => code !== '');
+  
+    if (allSlotsFilled) {
+      if (parseInt(formattedPin, 10) === parseInt(storedPin, 10)) {
+        setIsScreenBlocked(true);
+        setError(false);
+        navigate("/terminal/branches")
+      } else {
+        setIsScreenBlocked(false);
+        setError(true);
+      }
     }
-  }, [pinCode]);
+  }, [pinCode, pin]);
 
   return (
     <div className={styles.container}>

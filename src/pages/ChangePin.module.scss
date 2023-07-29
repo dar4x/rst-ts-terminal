@@ -51,6 +51,24 @@
   box-shadow: rgba(0, 0, 0, 0.35);
   font-size: 40px;
   cursor: pointer;
+  transition-duration: 0.3s;
+}
+
+.errorBlock{
+  margin-top: 15px;
+  width: 350px;
+  height: auto;
+  padding: 10px;
+  background-color: red;
+  color: white;
+  text-align: center;
+  border-radius: 8px;
+  opacity: 0; /* Start with 0 opacity */
+  transition: opacity 0.3s ease;
+}
+
+.errorBlock.show {
+  opacity: 1; /* When the 'show' class is added, opacity becomes 1 */
 }
 
 .change__pin {
@@ -100,4 +118,9 @@
 
 .unlock p {
   color: rgba(119, 112, 112, 1);
+}
+
+
+.error{
+  border: 1px solid red !important;
 }

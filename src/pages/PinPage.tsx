@@ -12,6 +12,9 @@ function PinPage() {
   const [pinCode, setPinCode] = useState(['', '', '', '']);
   const [isScreenBlocked, setIsScreenBlocked] = useState(false);
   const [unlock, setUnlock] = useState(false);
+  const [ error, setError ] = useState(false);
+
+  const pin = localStorage.getItem('newPin') || '';
 
   const navigate = useNavigate();
 
@@ -52,13 +55,23 @@ function PinPage() {
   };
 
   useEffect(() => {
-    if (pinCode.join('') === '4444') {
-      setIsScreenBlocked(true);
-    } else {
-      setIsScreenBlocked(false);
+    const formattedPin = pinCode.join('').trim(); 
+    const storedPin = (pin.replace(/"/g, '') ?? '').toString();
+    
+    const allSlotsFilled = pinCode.every((code) => code !== '');
+  
+    if (allSlotsFilled) {
+      if (parseInt(formattedPin, 10) === parseInt(storedPin, 10)) {
+        setIsScreenBlocked(true);
+        setError(false);
+      } else {
+        setIsScreenBlocked(false);
+        setError(true);
+      }
     }
-  }, [pinCode]);
-
+  }, [pinCode, pin]);
+  
+  
   return (
     <div className={styles.container}>
       {isScreenBlocked && (
@@ -84,6 +97,7 @@ function PinPage() {
             <img src={Logo} alt="" />
           </div>
           <div className={styles.header__title}>Пин код</div>
+          { error ? (<div>Неверный PIN код</div>) : null }
           <div className={styles.pincode}>
             <input
               className={styles.number}

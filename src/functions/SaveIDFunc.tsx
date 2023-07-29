@@ -54,3 +54,21 @@ export const getSavedCategory = () => {
     console.log(error)
   }
 }
+
+export const branchesSavedID = (id: number) => {
+  try {
+    const res = localStorage.setItem("branchesID", JSON.stringify(id));
+    return res;
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const getbranchesSavedID = () => {
+  try {
+    const res: any = localStorage.getItem("branchesID");
+    return JSON.parse(res);
+  } catch (error) {
+    console.log(error)
+  }
+}
