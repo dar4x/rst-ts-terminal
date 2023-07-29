@@ -7,8 +7,6 @@ import { useNavigate } from 'react-router-dom';
 
 
 const BranchesPick = () => {
-  const [ data, setData ] = useState([]);
-
   useEffect(() => {
     fetchBranches()
   }, []);
