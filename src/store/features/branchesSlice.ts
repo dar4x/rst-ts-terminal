@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { getbranchesSavedID } from 'src/functions/SaveIDFunc';
 import $axios from 'src/utils/axios';
 import { BASE_URL } from 'src/utils/const';
 
@@ -31,12 +32,12 @@ type CustomersI = {
 interface CustomersData {
   category: string;
   queue: number;
-}
+};
 
-// Измените URL на актуальный эндпоинт
-const API_URL = 'http://35.228.114.191/branches/1/get_service_types/';
+const branchesID = getbranchesSavedID();
 
-// Создайте асинхронный thunk для получения данных с бэкенда
+const API_URL = `http://35.228.114.191/branches/${branchesID}/get_service_types/`;
+
 export const fetchServiceTypes = createAsyncThunk<ServiceType[], void, { rejectValue: string }>(
     'branches/fetchServiceTypes',
     async (_, { rejectWithValue }) => {
@@ -72,6 +73,16 @@ export const fetchServiceTypes = createAsyncThunk<ServiceType[], void, { rejectV
       if(response.data) {
         localStorage.setItem("printTALON", JSON.stringify(response.data))
       }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  export const fetchBranches = async () => {
+    try {
+      const response = await $axios.get(`${BASE_URL}/branches/`);
+      const local = localStorage.setItem("branches", JSON.stringify(response.data))
+      return local;
     } catch (error) {
       console.log(error)
     }

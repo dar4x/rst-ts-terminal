@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainLayout from 'src/layouts/MainLayout';
+import BranchesPick from 'src/pages/BranchesPick';
 import ChangePin from 'src/pages/ChangePin';
 import DocumentationPage from 'src/pages/DocumentationPage';
 import PinPage from 'src/pages/PinPage';
@@ -22,6 +23,7 @@ const MainRoutes = () => {
         <Route path="/terminal/privileges" element={<PrivilegesPage />} />
         <Route path="/terminal/verification" element={<VerificationPage />} />
         <Route path="/terminal/changepin" element={<ChangePin />} />
+        <Route path="/terminal/branches" element={<BranchesPick />} />
       </Route>
       <Route path="/terminal/pin" element={<PinPage />} />
       <Route path="/terminal/unLock" element={<UnlockPage />} />
