@@ -81,13 +81,32 @@ export const fetchServiceTypes = createAsyncThunk<ServiceType[], void, { rejectV
   export const fetchBranches = async () => {
     try {
       const response = await $axios.get(`${BASE_URL}/branches/`);
-      const local = localStorage.setItem("branches", JSON.stringify(response.data))
-      return local;
+  
+      // Check if the response contains data and is not empty
+      if (response && response.data) {
+        const branches = response.data;
+        if (branches.results.length > 0) {
+          localStorage.setItem("branches", JSON.stringify(branches));
+          return branches;
+        } else {
+          // Handle the case where the branches are empty
+          console.log("Empty branches data:", branches);
+          localStorage.removeItem("branches");
+          return [];
+        }
+      } else {
+        console.log("Empty or invalid API response:", response);
+        // Handle the case where the response is empty or not in the expected format
+        localStorage.removeItem("branches");
+        return [];
+      }
     } catch (error) {
-      console.log(error)
+      console.log("Error fetching branches:", error);
+      // Handle the error appropriately, for example, you might want to throw it to the caller.
+      throw error;
     }
-  }
-
+  };
+  
 // Создайте slice с состоянием и редюсерами для получения данных о филиалах
 const branchesSlice = createSlice({
   name: 'branches',
