@@ -45,6 +45,7 @@ function ChangePin() {
             if (enteredPin === oldPIN) {
               setError('');
               setCurrentStep(1);
+              setPinCode(['', '', '', '']);  
             } else {
               setError('Неверный текущий ПИН код');
             }
@@ -54,6 +55,7 @@ function ChangePin() {
           localStorage.setItem('newPin', JSON.stringify(newPin));
           Cookies.set('newPin', newPin);
           setCurrentStep(2);
+          setPinCode(['', '', '', '']);  
           navigate('/terminal/branches');
         }
   
